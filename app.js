@@ -3,6 +3,7 @@ const mongoose = require('mongoose')
 const exphbs = require('express-handlebars')
 const Restaurant = require('./models/restaurant')
 const bodyParser = require('body-parser')
+const methodOverride = require('method-override')
 
 const app = express()
 const port = 3000
@@ -14,6 +15,7 @@ app.set('view engine', 'handlebars')
 
 app.use(express.static('public'))
 app.use(bodyParser.urlencoded({ extended: true }))
+app.use(methodOverride('_method'))
 
 const db = mongoose.connection
 
@@ -84,7 +86,7 @@ app.get('/restaurants/:id/edit', (req, res) => {
 })
 
 // 修改的資料傳入資料庫
-app.post('/restaurants/:id/edit', (req, res) => {
+app.put('/restaurants/:id', (req, res) => {
   const id = req.params.id
 
   const { name, name_en, category, image, location, phone, google_map, rating, description } = req.body
@@ -107,7 +109,7 @@ app.post('/restaurants/:id/edit', (req, res) => {
 })
 
 // 刪除路由
-app.post('/restaurants/:id/delete', (req, res) => {
+app.delete('/restaurants/:id', (req, res) => {
   const id = req.params.id
   return Restaurant.findById(id)
     .then(restaurant => restaurant.remove())

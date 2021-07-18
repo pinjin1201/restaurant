@@ -35,7 +35,7 @@
       </p>
       <div class="container d-flex justify-content-end align-items-center p-0 mb-3">
         <a class="btn btn-warning mr-2" href="/restaurants/{{restaurant._id}}/edit">Edit</a>
-        <form action="/restaurants/{{restaurant._id}}/delete" method="POST" style="display: inline;">
+        <form action="/restaurants/{{restaurant._id}}?_method=DELETE" method="POST" style="display: inline;">
           <button type="submit" class="btn btn-danger mr-2">delete</button>
         </form>
       </div>
