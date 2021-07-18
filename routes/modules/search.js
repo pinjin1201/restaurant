@@ -4,20 +4,18 @@ const router = express.Router()
 
 const Restaurant = require('../../models/restaurant')
 
-// search 路由
-router.get('/search', (req, res) => {
+// search
+router.get('/', (req, res) => {
   const keyword = req.query.keyword.trim().toLowerCase()
-
   Restaurant.find()
     .lean()
     .then(restaurants => {
-      restaurants = restaurants.filter(restaurant =>
-        restaurant.name.toLowerCase().includes(keyword) ||
-        restaurant.category.toLowerCase().includes(keyword)
+      restaurants = restaurants.filter(restaurant => 
+        restaurant.name.toLowerCase().includes(keyword) || restaurant.category.toLowerCase().includes(keyword)
       )
-      res.render('index', { restaurants })
+      res.render('index', { restaurants: restaurants, keyword: keyword })
     })
-    .catch(error => console.log(error))
+    .catch(error => console.error(error))
 })
 
 module.exports = router
