@@ -1,0 +1,52 @@
+<div class="container">
+  <h1 class="text-center text-info">編輯餐廳</h1>
+  <form action="/restaurants/{{restaurant._id}}/edit" method="POST">
+    <div class="mb-3">
+      <label for="name" class="form-label">name</label>
+      <input type="text" class="form-control" name="name" id="name" placeholder="name" value="{{restaurant.name}}"
+        required>
+    </div>
+    <div class="mb-3">
+      <label for="name_en" class="form-label">name_en</label>
+      <input type="text" class="form-control" name="name_en" id="name_en" placeholder="name_en"
+        value="{{restaurant.name_en}}" required>
+    </div>
+    <div class="mb-3">
+      <label for="category" class="form-label">category</label>
+      <input type="text" class="form-control" name="category" id="category" placeholder="category"
+        value="{{restaurant.category}}" required>
+    </div>
+    <div class="mb-3">
+      <label for="image" class="form-label">image</label>
+      <input type="url" class="form-control" name="image" id="image" placeholder="image" value="{{restaurant.image}}"
+        required>
+    </div>
+    <div class="mb-3">
+      <label for="location" class="form-label">location</label>
+      <input type="text" class="form-control" name="location" id="location" placeholder="location"
+        value="{{restaurant.location}}" required>
+    </div>
+    <div class="mb-3">
+      <label class="form-label">phone</label>
+      <input type="text" class="form-control" name="phone" id="phone" placeholder="phone" inputmode="numeric"
+        value="{{restaurant.phone}}" required>
+    </div>
+    <div class="mb-3">
+      <label for="google_map" class="form-label">google_map</label>
+      <input type="url" class="form-control" name="google_map" id="google_map" placeholder="google_map"
+        value="{{restaurant.google_map}}" required>
+    </div>
+    <div class="mb-3">
+      <label for="rating" class="form-label">rating</label>
+      <input type="text" class="form-control" name="rating" id="rating" placeholder="rating"
+        value="{{restaurant.rating}}" required>
+    </div>
+    <div class="mb-3">
+      <label for="description" class="form-label">description</label>
+      <textarea class="form-control" name="description" id="description" placeholder="description" rows="7">{{restaurant.description}}
+      </textarea>
+    </div>
+    <button type="submit" class="btn btn-info mr-2">Save</button>
+    <a href="/" class="btn btn-secondary mr-2">Back</a>
+  </form>
+</div>

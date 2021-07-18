@@ -73,6 +73,39 @@ app.get('/restaurants/:id', (req, res) => {
     .catch(error => console.log(error))
 })
 
+// 設定修改資料路由
+app.get('/restaurants/:id/edit', (req, res) => {
+  const id = req.params.id
+
+  return Restaurant.findById(id)
+    .lean()
+    .then(restaurant => res.render('edit', { restaurant }))
+    .catch(error => console.log(error))
+})
+
+// 修改的資料傳入資料庫
+app.post('/restaurants/:id/edit', (req, res) => {
+  const id = req.params.id
+
+  const { name, name_en, category, image, location, phone, google_map, rating, description } = req.body
+
+  return Restaurant.findById(id)
+    .then(restaurant => {
+      restaurant.name = name
+      restaurant.name_en = name_en
+      restaurant.category = category
+      restaurant.image = image
+      restaurant.location = location
+      restaurant.phone = phone
+      restaurant.google_map = google_map
+      restaurant.rating = rating
+      restaurant.description = description
+      return restaurant.save()
+    })
+    .then(() => res.redirect(`/restaurants/${id}`))
+    .catch(error => console.log(error))
+})
+
 app.listen(port, () => {
   console.log(`App is running on http://localhost:${port}`)
 })
