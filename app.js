@@ -1,16 +1,25 @@
-// 載入 express，並建構應用程式伺服器
 const express = require('express')
-const app = express()
+const mongoose = require('mongoose')
 
-// 設定 port
+const app = express()
 const port = 3000
 
-// 設定首頁路由
+mongoose.connect('mongodb://localhost/restaurant', { useNewUrlParser: true, useUnifiedTopology: true })
+
+const db = mongoose.connection
+
+db.on('error', () => {
+  console.log('mongodb error!')
+})
+
+db.once('open', () => {
+  console.log('mongodb connected!')
+})
+
 app.get('/', (req, res) => {
   res.send('hello world')
 })
 
-// 設定 port 3000
 app.listen(port, () => {
   console.log(`App is running on http://localhost:${port}`)
 })
